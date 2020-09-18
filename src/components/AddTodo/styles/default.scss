@@ -1,0 +1,36 @@
+.add-todo-container {
+    form {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        input {
+            flex: 0 0 100%;
+            margin: 20px 0;
+            padding: 14px;
+            border-radius: 5px;
+            border: 1px solid #000;
+        }
+
+        input[type=submit] {
+            background-color: #0098a7;
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-size: 16px;
+            width: 100%;
+            box-shadow: 1px 3px 2px 1px rgba(0, 0, 0, 0.3);
+            border-radius: 25px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        // .add-button {
+        //     width: 30px;
+        //     height: 30px;
+        //     background-image: url(/public/media/img/plus-sign.svg);
+        // }
+    }
+}

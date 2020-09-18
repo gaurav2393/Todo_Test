@@ -1,0 +1,36 @@
+.main-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 24px;
+    background-color: #fffaf0;
+    box-shadow: 1px 3px 2px 1px rgba(0, 0, 0, 0.3);
+
+    .mark-all-done {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        border-bottom: 1px solid #000;
+
+        .mark-done-checkbox {
+            flex: 0 0 10%;
+
+            input[type=checkbox] {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        p {
+            flex: 0 0 85%;
+            text-align: left;
+            font-size: 18px;
+        }
+    }
+
+    .done-length {
+        text-align: left;
+        font-size: 18px;
+        padding-left: 20px;
+    }
+}

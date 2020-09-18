@@ -1,0 +1,14 @@
+@media only screen and (min-width: 768px) {
+    .add-todo-container {
+        form {
+            input {
+                padding: 9px;
+                flex: 0 0 30%;
+            }
+
+            input[type=submit] {
+                max-width: 150px;
+            }
+        }
+    }
+}

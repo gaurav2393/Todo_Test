@@ -1,0 +1,131 @@
+.list-item-container {
+    display: flex;
+    align-items: center;
+
+    .list-item {
+        margin: 10px 0;
+        padding: 10px 0;
+        color: #fff;
+        border-radius: 6px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 18px;
+        border: 2px solid transparent;
+        letter-spacing: 1px;
+        flex: 0 0 90%;
+        word-break: break-word;
+
+        &.todo-deadline-1 {
+            border-color: #dc143c;
+            color: #dc143c;
+
+            &:hover {
+                border-color: #8B0000;
+            }
+        }
+
+        &.todo-deadline-2 {
+            
+            border-color: #00BFFF;
+            color: #00BFFF;
+        }
+
+        &.todo-deadline-3 {
+            border-color: #009900;
+            color: #009900;
+        }
+
+        &.done-item {
+            &.todo-deadline-1, &.todo-deadline-2, &.todo-deadline-3 {
+                border-color: #4b0082;
+                color: #4b0082;
+            }
+            .description {
+                text-decoration: line-through;
+            }
+        }
+
+        input[type=checkbox] {
+            width: 20px;
+            height: 20px;
+        }
+
+        .update-todo-desc {
+            padding: 9px 10px;
+            flex: 0 0 85%;
+
+            &:focus {
+                outline: 0;
+            }
+        }
+
+        .image-span {
+            flex: 0 0 10%;
+            width: 16px;
+            height: 16px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .delete-item {
+            background-image: url('/public/media/img/cancel.svg');
+        }
+
+        .edit-item {
+            background-image: url('/public/media/img/pencil.svg');
+        }
+
+        .edit-done {
+            background-image: url('/public/media/img/check.svg');
+        }
+
+        .todo-checkbox {
+            flex: 0 0 10%;
+        }
+
+        .todo-description-container {
+            flex: 0 0 85%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+
+            .description, .todo-date {
+                text-align: left;
+            }
+
+            .description {
+                flex: 0 0 44%;
+            }
+
+            .todo-date {
+                flex: 0 0 32%;
+            }
+        }
+    }
+
+    .priority {
+        flex: 0 0 8%;
+        text-align: right;
+
+        span {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+        }
+
+        .high-priority {
+            background-image: url('/public/media/img/starFilled.svg');
+        }
+
+        .low-priority {
+            background-image: url('/public/media/img/star.svg');
+        }
+    }
+}
