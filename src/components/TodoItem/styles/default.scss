@@ -11,7 +11,7 @@
         justify-content: space-around;
         align-items: center;
         font-size: 18px;
-        border: 2px solid transparent;
+        border: 4px solid transparent;
         letter-spacing: 1px;
         flex: 0 0 90%;
         word-break: break-word;
@@ -19,10 +19,6 @@
         &.todo-deadline-1 {
             border-color: #dc143c;
             color: #dc143c;
-
-            &:hover {
-                border-color: #8B0000;
-            }
         }
 
         &.todo-deadline-2 {

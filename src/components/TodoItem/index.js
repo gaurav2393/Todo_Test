@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { monthsArray } from '../utils/constants';
 import './styles/index.scss';
 
@@ -23,7 +24,7 @@ const TodoItem = (props) => {
                     </Fragment>
                     : <Fragment>
                         <div className="todo-checkbox">
-                            <input type="checkbox" onClick={() => toDoCheck(index, type)} checked={type==='done'} onChange={() => toDoCheck(index, type)} />
+                            <input type="checkbox" onClick={(event) => toDoCheck(event, index, type)} checked={type==='done'} />
                         </div>
                         <div className="todo-description-container">
                             <span className="description">{todo.desc}</span>
@@ -34,15 +35,38 @@ const TodoItem = (props) => {
                     </Fragment>
                 }
             </div>
-            <div className="priority">
+            {type==='todo' && <div className="priority">
                 {todo.priority===1 ? (
                     <span className="high-priority" onClick={() => markAsPriority(index)}></span>
                 ) : (
                     <span className="low-priority" onClick={() => markAsPriority(index)}></span>
                 )}
-            </div>
+            </div>}
         </li>
     )
+}
+
+TodoItem.propTypes  = {
+    todo: PropTypes.instanceOf(Object),
+    type: PropTypes.string,
+    index: PropTypes.number.isRequired,
+    toDoCheck: PropTypes.func,
+    editTodo: PropTypes.func,
+    removeTodo: PropTypes.func,
+    handleTodoUpdate: PropTypes.func,
+    updateDone: PropTypes.func,
+    markAsPriority: PropTypes.func,
+}
+
+TodoItem.defaultProps = {
+    todo: {},
+    type: '',
+    toDoCheck: () => {},
+    editTodo: () => {},
+    removeTodo: () => {},
+    handleTodoUpdate: () => {},
+    updateDone: () => {},
+    markAsPriority: () => {},
 }
 
 export default TodoItem;

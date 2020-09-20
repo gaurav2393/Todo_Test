@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import _ from 'lodash';
 import ToDosList from '../../components/ToDosList';
 import SearchInput from '../../components/SearchInput';
 import AddTodo from '../../components/AddTodo';
@@ -55,14 +54,14 @@ class Todo extends React.Component {
     addNewTodo = (event) => {
         event.preventDefault();
         const { currentTodos, newTodoText, currentToDoTime} = this.state;
-        const newToDoList = [
+        const newToDoList = currentTodos.concat([
             {
                 desc: newTodoText,
                 isEditMode: false,
                 date: new Date(currentToDoTime),
                 priority: 2
             }
-        ].concat(_.cloneDeep(currentTodos));
+        ]);
         this.setState({
             currentTodos: newToDoList,
             newTodoText: "",
@@ -78,32 +77,29 @@ class Todo extends React.Component {
         }
     }
 
-    toDoCheck = (index, type) => {
+    toDoCheck = (event, index, type) => {
+        event.stopPropagation();
         const { currentTodos, doneTodos } = this.state;
         let selectedTodo;
         if (type==='todo') {
             selectedTodo = Object.assign({}, currentTodos[index]);
-            const newToDoList = [].concat(_.cloneDeep(currentTodos));
-            newToDoList.splice(index, 1);
-            const newDoneTodos = _.cloneDeep(doneTodos);
-            newDoneTodos.push(selectedTodo)
+            currentTodos.splice(index, 1);
+            doneTodos.push(selectedTodo)
             this.setState({
-                currentTodos: newToDoList,
-                doneTodos: newDoneTodos,
+                currentTodos,
+                doneTodos,
             })
         } else {
             selectedTodo = Object.assign({}, doneTodos[index]);
-            const newDoneTodos = _.cloneDeep(doneTodos);
-            newDoneTodos.splice(index, 1);
-            const newToDoList = _.cloneDeep(currentTodos);
+            doneTodos.splice(index, 1);
             if (selectedTodo.priority === 1) {
-                newToDoList.unshift(selectedTodo);
+                currentTodos.unshift(selectedTodo);
             } else {
-                newToDoList.push(selectedTodo);
+                currentTodos.push(selectedTodo);
             }
             this.setState({
-                currentTodos: newToDoList,
-                doneTodos: newDoneTodos,
+                currentTodos,
+                doneTodos,
             })
         }
     }
@@ -113,57 +109,50 @@ class Todo extends React.Component {
         let selectedTodo;
         if (type==='todo') {
             selectedTodo = Object.assign({}, currentTodos[index]);
-            const newToDoList = [].concat(_.cloneDeep(currentTodos));
-            newToDoList.splice(index, 1);
+            currentTodos.splice(index, 1);
             this.setState({
-                currentTodos: newToDoList,
+                currentTodos,
             })
         } else {
             selectedTodo = Object.assign({}, doneTodos[index]);
-            const newDoneTodos = _.cloneDeep(doneTodos);
-            newDoneTodos.splice(index, 1);
+            doneTodos.splice(index, 1);
             this.setState({
-                doneTodos: newDoneTodos,
+                doneTodos,
             })
         }
     }
 
     markAllDone = () => {
         const { currentTodos, doneTodos } = this.state;
-        const newDoneTodos = _.cloneDeep(doneTodos);
-        const newCurrentTodos = _.cloneDeep(currentTodos);
         this.setState({
             currentTodos: [],
-            doneTodos: newDoneTodos.concat(newCurrentTodos),
+            doneTodos: doneTodos.concat(currentTodos),
         })
     }
 
     editTodo = (index) => {
         const { currentTodos } = this.state;
-        const newCurrentTodos = _.cloneDeep(currentTodos);
-        newCurrentTodos[index].isEditMode = true;
+        currentTodos[index].isEditMode = true;
         this.setState({
-            currentTodos: newCurrentTodos,
+            currentTodos,
         })
     }
 
     updateDone = (index) => {
         const { currentTodos } = this.state;
-        const newCurrentTodos = _.cloneDeep(currentTodos);
-        newCurrentTodos[index].isEditMode = false;
+        currentTodos[index].isEditMode = false;
         this.setState({
-            currentTodos: newCurrentTodos,
+            currentTodos,
         })
     }
 
     handleTodoUpdate = (event, index) => {
         const { currentTodos } = this.state;
-        const newCurrentTodos = _.cloneDeep(currentTodos);
         if (event && event.target) {
-            newCurrentTodos[index].desc = event.target.value;
+            currentTodos[index].desc = event.target.value;
         }
         this.setState({
-            currentTodos: newCurrentTodos,
+            currentTodos,
         })
     }
 
@@ -181,17 +170,16 @@ class Todo extends React.Component {
 
     markAsPriority = (index) => {
         const { currentTodos } = this.state;
-        const newCurrentTodos = _.cloneDeep(currentTodos);
-        newCurrentTodos[index].priority = newCurrentTodos[index].priority===1 ? 2 : 1;
-        const selectedTodo = newCurrentTodos[index];
-        newCurrentTodos.splice(index, 1);
+        currentTodos[index].priority = currentTodos[index].priority===1 ? 2 : 1;
+        const selectedTodo = currentTodos[index];
+        currentTodos.splice(index, 1);
         if (selectedTodo.priority === 1) {
-            newCurrentTodos.unshift(selectedTodo)
+            currentTodos.unshift(selectedTodo)
         } else {
-            newCurrentTodos.push(selectedTodo);
+            currentTodos.push(selectedTodo);
         }
         this.setState({
-            currentTodos: newCurrentTodos,
+            currentTodos,
         })
     }
 

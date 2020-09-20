@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './styles/index.scss';
 
 const AddTodo = ({
@@ -17,6 +18,22 @@ const AddTodo = ({
             </form>
         </div>
     )
+}
+
+AddTodo.propTypes  = {
+    handleChange: PropTypes.func,
+    value: PropTypes.string,
+    handleSubmit: PropTypes.func,
+    handleCurrentTimeChange: PropTypes.func,
+    currentToDoTime: PropTypes.string,
+}
+
+AddTodo.defaultProps = {
+    handleChange: () => {},
+    value: '',
+    handleSubmit: () => {},
+    handleCurrentTimeChange: () => {},
+    currentToDoTime: '',
 }
 
 export default AddTodo;
